@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Braces, Terminal } from "lucide-react";
+import { ArrowRight, BookOpen, Terminal } from "lucide-react";
 
 export default function Home() {
   return (
@@ -38,11 +38,10 @@ export default function Home() {
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
           <Link
-            href="/docs/api"
+            href="#templates"
             className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md border border-zinc-200 bg-white/70 px-5 text-sm font-semibold text-zinc-800 shadow-sm backdrop-blur transition hover:border-zinc-300 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 focus:ring-offset-white dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-900 dark:focus:ring-zinc-500 dark:focus:ring-offset-zinc-950 sm:w-auto"
           >
-            <Braces className="h-4 w-4" aria-hidden="true" />
-            View API
+            View sample templates
           </Link>
         </div>
 
@@ -69,6 +68,47 @@ export default function Home() {
               <span className="text-zinc-500">--workspace assets</span>
             </code>
           </pre>
+        </div>
+      </section>
+
+      <section
+        id="templates"
+        className="mx-auto w-full max-w-6xl px-6 pb-24 sm:px-8"
+      >
+        <div className="border-t border-zinc-200 pt-16 dark:border-zinc-800">
+          <div className="max-w-2xl">
+            <p className="text-sm font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              Sample templates
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+              Live examples are currently under development
+            </h2>
+            <p className="mt-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+              Ready-made README and documentation templates will appear here as
+              the PixStock API examples mature.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              "GitHub profile README",
+              "Project showcase",
+              "Developer portfolio",
+            ].map((template) => (
+              <div
+                key={template}
+                className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
+              >
+                <div className="mb-4 h-24 rounded-md border border-dashed border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-black" />
+                <h3 className="text-sm font-semibold text-zinc-950 dark:text-white">
+                  {template}
+                </h3>
+                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                  Coming soon
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </main>
