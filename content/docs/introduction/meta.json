@@ -1,4 +1,13 @@
 {
   "title": "Introduction",
-  "pages": ["github-stats", "pin-api", "icons-api", "animal-api"]
+  "defaultOpen": true,
+  "collapsible": true,
+  "pages": [
+    "index",
+    "github-stats",
+    "pin-api",
+    "icons-api",
+    "animal-api",
+    "vehicle-api"
+  ]
 }
