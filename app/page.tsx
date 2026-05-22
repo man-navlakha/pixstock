@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, Terminal } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 
 export default function Home() {
   return (
@@ -45,30 +45,6 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="mt-16 w-full max-w-3xl overflow-hidden rounded-lg border border-zinc-200 bg-zinc-950 text-left shadow-2xl shadow-zinc-950/10 dark:border-zinc-800 dark:bg-black dark:shadow-black/40">
-          <div className="flex h-11 items-center gap-2 border-b border-white/10 bg-zinc-900 px-4">
-            <span className="h-3 w-3 rounded-full bg-red-400" />
-            <span className="h-3 w-3 rounded-full bg-amber-400" />
-            <span className="h-3 w-3 rounded-full bg-emerald-400" />
-            <div className="ml-3 flex items-center gap-2 text-xs font-medium text-zinc-400">
-              <Terminal className="h-3.5 w-3.5" aria-hidden="true" />
-              terminal
-            </div>
-          </div>
-          <pre className="overflow-x-auto p-6 font-mono text-sm leading-7 text-zinc-100 sm:text-base">
-            <code>
-              <span className="text-zinc-500">$</span>{" "}
-              <span className="text-sky-300">npm</span>{" "}
-              <span className="text-emerald-300">install</span>{" "}
-              <span className="text-violet-300">pixstock-core</span>
-              {"\n"}
-              <span className="text-zinc-500">$</span>{" "}
-              <span className="text-sky-300">npx</span>{" "}
-              <span className="text-zinc-100">pixstock init</span>{" "}
-              <span className="text-zinc-500">--workspace assets</span>
-            </code>
-          </pre>
-        </div>
       </section>
 
       <section
