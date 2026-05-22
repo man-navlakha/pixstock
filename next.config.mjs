@@ -7,6 +7,20 @@ const nextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  async redirects() {
+    return [
+      {
+        source: '/tamplate',
+        destination: '/templates',
+        permanent: false,
+      },
+      {
+        source: '/templates-builder',
+        destination: '/templates',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default withMDX(nextConfig);

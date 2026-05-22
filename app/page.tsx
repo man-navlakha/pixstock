@@ -38,10 +38,11 @@ export default function Home() {
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
           <Link
-            href="#templates"
+            href="/templates"
             className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md border border-zinc-200 bg-white/70 px-5 text-sm font-semibold text-zinc-800 shadow-sm backdrop-blur transition hover:border-zinc-300 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 focus:ring-offset-white dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-900 dark:focus:ring-zinc-500 dark:focus:ring-offset-zinc-950 sm:w-auto"
           >
-            View sample templates
+            Template Builder
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
@@ -54,37 +55,44 @@ export default function Home() {
         <div className="border-t border-zinc-200 pt-16 dark:border-zinc-800">
           <div className="max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-              Sample templates
+              Template Builder
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">
-              Live examples are currently under development
+              Generate stunning README templates
             </h2>
             <p className="mt-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">
-              Ready-made README and documentation templates will appear here as
-              the PixStock API examples mature.
+              Use our interactive template builder to create beautiful GitHub profile READMEs, project showcases, and company documentation with live previews.
             </p>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {[
-              "GitHub profile README",
-              "Project showcase",
-              "Developer portfolio",
+              { title: "GitHub Profile README", desc: "Beautiful profile templates with stats and info" },
+              { title: "Project Showcase", desc: "Coming soon" },
+              { title: "Company Documentation", desc: "Coming soon" },
             ].map((template) => (
               <div
-                key={template}
-                className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
+                key={template.title}
+                className="group rounded-lg border border-zinc-200 bg-white p-5 shadow-sm transition hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950"
               >
                 <div className="mb-4 h-24 rounded-md border border-dashed border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-black" />
                 <h3 className="text-sm font-semibold text-zinc-950 dark:text-white">
-                  {template}
+                  {template.title}
                 </h3>
                 <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  Coming soon
+                  {template.desc}
                 </p>
               </div>
             ))}
           </div>
+
+          <Link
+            href="/templates"
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:hover:bg-blue-500 dark:focus:ring-offset-zinc-950"
+          >
+            Open Template Builder
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </section>
     </main>
