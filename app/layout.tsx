@@ -72,11 +72,6 @@ export default function RootLayout({
             enableSystem: false,
             disableTransitionOnChange: true,
           }}
-          search={{
-            options: {
-              placeholder: "Search PixStock docs...",
-            },
-          }}
         >
           {children}
         </RootProvider>

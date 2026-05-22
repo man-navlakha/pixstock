@@ -1,0 +1,111 @@
+---
+title: GitHub Stats Card API
+description: Generate dynamic SVG GitHub profile cards for READMEs, dashboards, and documentation.
+---
+
+import StatsLivePreview from "@/components/StatsLivePreview";
+
+<StatsLivePreview />
+
+## Overview
+
+The GitHub Stats Card API returns a polished SVG card for a GitHub profile. It
+is designed for GitHub READMEs, portfolio pages, dashboards, and documentation
+sites where the embed must stay visually stable.
+
+The endpoint always responds with `image/svg+xml; charset=utf-8`. Even error
+states such as `400`, `404`, and `502` are returned as SVG output, so Markdown
+embeds do not collapse into broken image UI.
+
+## Endpoint
+
+| Property | Value |
+| --- | --- |
+| Base URL | `https://img-server-theta.vercel.app/api/stats` |
+| Method | `GET` |
+| Content-Type | `image/svg+xml; charset=utf-8` |
+
+## Required Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `username` | `string` | GitHub login name used to fetch profile and repository statistics. |
+
+## Layout And Visibility Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `theme` | `dark \| light \| ocean` | `dark` | Applies one of the built-in visual themes. |
+| `show_languages` | `true \| false` | `false` | Shows a language summary when enabled. |
+| `show_avatar` | `true \| false` | `true` | Shows the user's GitHub avatar. |
+| `show_followers` | `true \| false` | `true` | Shows follower count. |
+| `show_following` | `true \| false` | `true` | Shows following count. |
+| `show_repos` | `true \| false` | `true` | Shows public repository count. |
+| `show_title` | `true \| false` | `true` | Shows the card title/header. |
+| `show_border` | `true \| false` | `true` | Shows the outer card border. |
+| `compact` | `true \| false` | `false` | Uses a denser layout with reduced spacing. |
+| `border_radius` | `0-40` | `22` | Controls corner radius in pixels. |
+| `border_width` | `0-6` | `1` | Controls border width in pixels. |
+| `card_width` | `320-800` | `430` | Controls total SVG width in pixels. |
+
+## Color Overrides
+
+Use hex values without the leading `#`.
+
+| Parameter | Description |
+| --- | --- |
+| `title_color` | Overrides heading and title color. |
+| `text_color` | Overrides body text and stat label color. |
+| `icon_color` | Overrides accent icons and highlighted values. |
+| `bg_color` | Overrides card background color. |
+| `border_color` | Overrides outer border color. |
+
+## Theme Defaults
+
+| Theme | Background | Text | Title | Icon |
+| --- | --- | --- | --- | --- |
+| Dark | `#0f172a` | `#d5ddf0` | `#ffffff` | `#71f3c6` |
+| Light | `#ecfeff` | `#334155` | `#0f172a` | `#0ea5e9` |
+| Ocean | `#082f49` | `#b7e3f8` | `#ecfeff` | `#3ddad7` |
+
+## API Usage
+
+```http
+GET https://img-server-theta.vercel.app/api/stats?username=man-navlakha
+```
+
+```http
+GET https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=ocean&show_languages=true&compact=true
+```
+
+```http
+GET https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=dark&title_color=ffffff&text_color=d5ddf0&icon_color=71f3c6&bg_color=0f172a&border_color=1e293b
+```
+
+## Markdown Embed
+
+Use the generated URL directly in Markdown:
+
+```md
+![GitHub Stats Card](https://img-server-theta.vercel.app/api/stats?username=man-navlakha)
+```
+
+With additional options:
+
+```md
+![GitHub Stats Card](https://img-server-theta.vercel.app/api/stats?username=man-navlakha&theme=ocean&show_languages=true&show_avatar=true&show_border=true&compact=false)
+```
+
+## Error Behavior
+
+The API is README-safe by design. Instead of returning JSON or plain-text error
+responses, failures are rendered as SVG cards with a clear message.
+
+| Status | When It Happens | Response Format |
+| --- | --- | --- |
+| `400` | Required input is missing or invalid. | SVG |
+| `404` | The GitHub user cannot be found. | SVG |
+| `502` | GitHub data cannot be fetched upstream. | SVG |
+
+Because every response remains an SVG, GitHub and other Markdown renderers keep
+the visual layout intact even when a request fails.

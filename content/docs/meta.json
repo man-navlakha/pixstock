@@ -1,4 +1,4 @@
 {
   "title": "PixStock",
-  "pages": ["index", "api"]
+  "pages": ["index", "introduction", "api"]
 }

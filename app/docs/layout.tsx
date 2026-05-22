@@ -26,9 +26,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       ]}
       searchToggle={{
         enabled: true,
-        full: {
-          placeholder: "Search documentation...",
-        },
       }}
       sidebar={{
         defaultOpenLevel: 1,
