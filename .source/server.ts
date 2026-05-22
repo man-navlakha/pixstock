@@ -1,5 +1,8 @@
 // @ts-nocheck
-import * as __fd_glob_4 from "../content/docs/introduction/github-stats.mdx?collection=docs"
+import * as __fd_glob_7 from "../content/docs/introduction/pin-api.mdx?collection=docs"
+import * as __fd_glob_6 from "../content/docs/introduction/icons-api.mdx?collection=docs"
+import * as __fd_glob_5 from "../content/docs/introduction/github-stats.mdx?collection=docs"
+import * as __fd_glob_4 from "../content/docs/introduction/animal-api.mdx?collection=docs"
 import * as __fd_glob_3 from "../content/docs/index.mdx?collection=docs"
 import * as __fd_glob_2 from "../content/docs/api.mdx?collection=docs"
 import { default as __fd_glob_1 } from "../content/docs/introduction/meta.json?collection=docs"
@@ -12,4 +15,4 @@ const create = server<typeof Config, import("fumadocs-mdx/runtime/types").Intern
   }
 }>({"doc":{"passthroughs":["extractedReferences"]}});
 
-export const docs = await create.docs("docs", "content/docs", {"meta.json": __fd_glob_0, "introduction/meta.json": __fd_glob_1, }, {"api.mdx": __fd_glob_2, "index.mdx": __fd_glob_3, "introduction/github-stats.mdx": __fd_glob_4, });
+export const docs = await create.docs("docs", "content/docs", {"meta.json": __fd_glob_0, "introduction/meta.json": __fd_glob_1, }, {"api.mdx": __fd_glob_2, "index.mdx": __fd_glob_3, "introduction/animal-api.mdx": __fd_glob_4, "introduction/github-stats.mdx": __fd_glob_5, "introduction/icons-api.mdx": __fd_glob_6, "introduction/pin-api.mdx": __fd_glob_7, });

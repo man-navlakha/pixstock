@@ -1,0 +1,70 @@
+---
+title: Animal API
+description: Resolve animal names into high-quality image redirects with local static fallbacks and Pexels-powered dynamic search.
+---
+
+import AnimalLivePreview from "@/components/AnimalLivePreview";
+
+<AnimalLivePreview />
+
+## Overview
+
+The Animal API acts as a seamless image redirect for animal names. It is built
+for Markdown embeds, profile pages, documentation, and lightweight visual
+content where consumers only need a stable image URL.
+
+The resolver uses a hybrid strategy. It first checks a fast local static list for
+known keywords. If the name is not found locally, it dynamically queries the
+Pexels API and redirects to a high-quality stock photo.
+
+## Endpoint
+
+| Property | Value |
+| --- | --- |
+| Base Endpoint | `https://img-server-theta.vercel.app/api/animal/:name` |
+| Method | `GET` |
+| Behavior | Redirects to a resolved image URL from the static list or Pexels fallback. |
+
+## Path Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | Yes | Animal name or supported static keyword. Use hyphens for multi-word names, such as `red-panda`. |
+
+## Static Keywords (Instant Load)
+
+These names resolve from the local static list before any external lookup:
+
+| Keyword | Resolution |
+| --- | --- |
+| `tiger` | Static |
+| `lion` | Static |
+| `elephant` | Static |
+| `pixelclass` | Static |
+| `mann` | Static |
+| `man` | Static |
+
+## Dynamic Fallback
+
+Any keyword not found in the static list is sent to Pexels for dynamic image
+resolution. This allows broad animal coverage without requiring every possible
+animal to be hardcoded.
+
+```http
+GET https://img-server-theta.vercel.app/api/animal/capybara
+```
+
+## Embed Examples
+
+```md
+![Tiger](https://img-server-theta.vercel.app/api/animal/tiger)
+![Lion](https://img-server-theta.vercel.app/api/animal/lion)
+![Elephant](https://img-server-theta.vercel.app/api/animal/elephant)
+![Dog](https://img-server-theta.vercel.app/api/animal/dog)
+![Cat](https://img-server-theta.vercel.app/api/animal/cat)
+![Red Panda](https://img-server-theta.vercel.app/api/animal/red-panda)
+![Capybara](https://img-server-theta.vercel.app/api/animal/capybara)
+![Eagle](https://img-server-theta.vercel.app/api/animal/eagle)
+![Great White Shark](https://img-server-theta.vercel.app/api/animal/shark)
+![PixelClass](https://img-server-theta.vercel.app/api/animal/pixelclass)
+```

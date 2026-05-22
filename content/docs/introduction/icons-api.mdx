@@ -1,0 +1,95 @@
+---
+title: Tech Stack Icons API
+description: Generate dynamic SVG grids of branded technology icons.
+---
+
+import IconsLivePreview from "@/components/IconsLivePreview";
+
+<IconsLivePreview />
+
+## Overview
+
+The Tech Stack Icons API generates a dynamic SVG grid of branded tiles from a
+comma-separated list of technologies. It is built for profile READMEs, project
+documentation, portfolio pages, and any page that needs a compact visual stack
+summary.
+
+## Endpoint
+
+| Property | Value |
+| --- | --- |
+| Base Endpoint | `https://img-server-theta.vercel.app/icons?i=...` |
+| Method | `GET` |
+| Content-Type | `image/svg+xml; charset=utf-8` |
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `i` | Comma-separated string | Yes | Technology names or aliases to render as branded icon tiles. |
+| `theme` | `dark \| light` | No | Selects themed icon backgrounds. Defaults to `dark`. |
+| `perline` | `1-50` | No | Controls how many icons appear before wrapping. Defaults to `15`. |
+
+### Themed Icons
+
+Some icons have a dark and light themed background. You can specify which theme
+you want as a URL parameter. This is optional. The default theme is dark. Change
+the `&theme=` parameter to either `dark` or `light`.
+
+Light Theme:
+
+```md
+![Tech Stack Icons](https://img-server-theta.vercel.app/icons?i=java,kotlin,nodejs,figma&theme=light)
+```
+
+Dark Theme:
+
+```md
+![Tech Stack Icons](https://img-server-theta.vercel.app/icons?i=java,kotlin,nodejs,figma&theme=dark)
+```
+
+### Icons Per Line
+
+You can specify how many icons you would like per line. It is an optional
+argument, and the default is 15. Change the `&perline=` parameter to any number
+between 1 and 50.
+
+3 Per Line:
+
+```md
+![Tech Stack Icons](https://img-server-theta.vercel.app/icons?i=java,kotlin,nodejs,figma&perline=3)
+```
+
+4 Per Line:
+
+```md
+![Tech Stack Icons](https://img-server-theta.vercel.app/icons?i=java,kotlin,nodejs,figma,next,js,html,css&perline=4)
+```
+
+## Aliases
+
+Aliases are supported for common shorthand names. For example, `js` resolves to
+`javascript`, and `next` resolves to `nextjs`.
+
+```http
+GET https://img-server-theta.vercel.app/icons?i=java,kotlin,nodejs,figma&theme=dark&perline=15
+```
+
+## Markdown Embed
+
+```md
+![Tech Stack Icons](https://img-server-theta.vercel.app/icons?i=java,kotlin,nodejs,figma&theme=dark&perline=15)
+```
+
+## Catalog
+
+Use the catalog endpoint to inspect the complete list of supported icons and
+aliases.
+
+<a
+  href="https://img-server-theta.vercel.app/api/icons"
+  target="_blank"
+  rel="noreferrer"
+>
+  View full icon catalog
+</a>

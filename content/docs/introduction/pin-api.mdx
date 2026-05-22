@@ -1,0 +1,92 @@
+---
+title: Repository Pin API
+description: Generate dynamic SVG repository cards for GitHub READMEs and project showcases.
+---
+
+import PinLivePreview from "@/components/PinLivePreview";
+
+<PinLivePreview />
+
+## Overview
+
+The Repository Pin API renders a GitHub repository as a clean SVG card. It is
+ideal for profile READMEs, portfolio pages, documentation landing pages, and
+project directories where the card should link directly to the repository.
+
+## Endpoint
+
+| Property | Value |
+| --- | --- |
+| Base URL | `https://img-server-theta.vercel.app/api/pin` |
+| Method | `GET` |
+| Content-Type | `image/svg+xml; charset=utf-8` |
+
+## Query Parameters
+
+| Parameter | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| `username` | `string` | Yes | - | GitHub login name that owns the repository. |
+| `repo` | `string` | Yes | - | Repository name to render. |
+| `theme` | `react \| dark \| light` | No | `react` | Applies a built-in visual theme. |
+| `title` | `string` | No | Repository name | Overrides the repository title displayed on the card. |
+| `owner_name` | `string` | No | GitHub owner | Overrides the owner label when owner display is enabled. |
+| `font_family` | `string` | No | System UI | Sets the font family used in the SVG. |
+| `card_width` | `340-900` | No | `430` | Controls the rendered SVG width in pixels. |
+| `border_radius` | `8-40` | No | `16` | Controls card corner radius in pixels. |
+| `show_icons` | `true \| false` | No | `true` | Shows metric and metadata icons. |
+| `hide_border` | `true \| false` | No | `false` | Removes the outer card border. |
+| `show_owner` | `true \| false` | No | `true` | Shows the repository owner. |
+| `show_language` | `true \| false` | No | `true` | Shows the primary repository language. |
+| `bg_color` | Hex without `#` | No | Theme value | Overrides card background color. |
+| `title_color` | Hex without `#` | No | Theme value | Overrides repository title color. |
+| `text_color` | Hex without `#` | No | Theme value | Overrides description and metadata text color. |
+| `icon_color` | Hex without `#` | No | Theme value | Overrides icon and accent color. |
+| `border_color` | Hex without `#` | No | Theme value | Overrides card border color. |
+
+## Basic Usage
+
+```http
+GET https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms
+```
+
+## Markdown Embed
+
+Wrap the generated image in a repository link:
+
+```html
+<a href="https://github.com/man-navlakha/blog_ms">
+  <img src="https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms" />
+</a>
+```
+
+## Advanced Customization
+
+Use layout controls to fit different README sections:
+
+```md
+<a href="https://github.com/man-navlakha/blog_ms">
+  <img src="https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms&theme=dark&card_width=560&border_radius=24" />
+</a>
+```
+
+Hide secondary details for a compact project grid:
+
+```md
+<a href="https://github.com/man-navlakha/blog_ms">
+  <img src="https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms&show_owner=false&show_language=false&hide_border=true" />
+</a>
+```
+
+Apply brand colors with hex overrides:
+
+```md
+<a href="https://github.com/man-navlakha/blog_ms">
+  <img src="https://img-server-theta.vercel.app/api/pin?username=man-navlakha&repo=blog_ms&bg_color=0f172a&title_color=ffffff&text_color=cbd5e1&icon_color=61dafb&border_color=1e293b" />
+</a>
+```
+
+## Error Behavior
+
+The API is intended for visual embeds. Invalid inputs, missing repositories, or
+upstream GitHub failures should still render as SVG output so GitHub READMEs and
+other Markdown surfaces remain visually stable.
