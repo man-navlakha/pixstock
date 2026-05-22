@@ -1,0 +1,20 @@
+---
+title: API Reference
+description: Learn the core PixStock API surfaces.
+---
+
+The PixStock API is designed around predictable asset operations.
+
+## Core package
+
+```ts
+import { PixStock } from "pixstock-core";
+
+const pixstock = new PixStock({
+  token: process.env.PIXSTOCK_TOKEN,
+});
+```
+
+## Assets
+
+Use assets to upload, tag, transform, and deliver media across your product.
