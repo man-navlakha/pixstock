@@ -1,0 +1,159 @@
+# User Profile Module
+
+The user profile module lets authenticated users read and update their own profile. It reuses the existing JWT authentication middleware, PostgreSQL database pool, error handling, and feature-based Express architecture.
+
+## Folder Structure
+
+```text
+src/features/users/
+  controllers/userProfile.controller.js
+  dtos/userProfile.dto.js
+  interfaces/userProfile.interfaces.js
+  repositories/userProfile.repository.js
+  routes/userProfile.routes.js
+  services/userProfile.service.js
+  validators/userProfile.validator.js
+```
+
+Controllers only translate HTTP requests and responses. Services hold business rules. Repositories own SQL. DTOs shape public responses and prevent sensitive fields from leaking.
+
+## Database Changes
+
+Migration:
+
+```text
+src/infrastructure/database/migrations/20260613194500_add_user_profile_columns.sql
+```
+
+Adds these nullable columns to `users`:
+
+```text
+name varchar(100)
+email varchar(255)
+profile_image text
+```
+
+Also adds:
+
+- `users_name_length` check constraint.
+- `users_email_format` check constraint.
+- `users_profile_image_url` check constraint.
+- `users_email_unique_active_idx` unique index on `lower(email)` for active users.
+
+Apply with:
+
+```bash
+npm run migrate
+```
+
+## APIs
+
+Base URL:
+
+```text
+/api/v1/users
+```
+
+All endpoints require:
+
+```http
+Authorization: Bearer <accessToken>
+```
+
+### GET `/me`
+
+Returns the authenticated user's profile.
+
+Response `200`:
+
+```json
+{
+  "success": true,
+  "message": "Profile loaded successfully",
+  "data": {
+    "id": "uuid",
+    "name": "John Doe",
+    "phone": "+94771234567",
+    "email": "john@example.com",
+    "profileImage": "https://example.com/avatar.png",
+    "role": "CUSTOMER",
+    "createdAt": "2026-06-13T00:00:00.000Z",
+    "updatedAt": "2026-06-13T00:00:00.000Z"
+  }
+}
+```
+
+### PATCH `/me`
+
+Updates the authenticated user's own profile. Partial updates are supported.
+
+Request:
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "profileImage": "https://example.com/avatar.png"
+}
+```
+
+Response `200`:
+
+```json
+{
+  "success": true,
+  "message": "Profile updated successfully",
+  "data": {
+    "id": "uuid",
+    "name": "John Doe",
+    "phone": "+94771234567",
+    "email": "john@example.com",
+    "profileImage": "https://example.com/avatar.png",
+    "role": "CUSTOMER",
+    "createdAt": "2026-06-13T00:00:00.000Z",
+    "updatedAt": "2026-06-13T00:00:00.000Z"
+  }
+}
+```
+
+## Validation Rules
+
+`name`
+
+- Optional.
+- Must be a string when provided.
+- Minimum 2 characters.
+- Maximum 100 characters.
+
+`email`
+
+- Optional.
+- Must be a valid email address when provided.
+- Must be unique across active users.
+
+`profileImage`
+
+- Optional.
+- Must be a valid `http://` or `https://` URL when provided.
+
+Protected fields are ignored and never written:
+
+```text
+id
+role
+password
+phone
+createdAt
+updatedAt
+```
+
+Unexpected fields are rejected with a validation error.
+
+## Security Considerations
+
+- JWT authentication is required for both endpoints.
+- The authenticated user ID comes from the verified access token.
+- Users cannot choose a target user ID in the URL or body.
+- Repository updates whitelist only `name`, `email`, and `profileImage`.
+- The response DTO excludes `password_hash`, token data, account lock fields, and soft-delete metadata.
+- Email uniqueness is enforced in both service logic and the database unique index.

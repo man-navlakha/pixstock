@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen, Wrench } from "lucide-react";
 
 export default function Home() {
   return (
@@ -52,6 +52,46 @@ export default function Home() {
         id="templates"
         className="mx-auto w-full max-w-6xl px-6 pb-24 sm:px-8"
       >
+        <div className="mb-16 grid gap-4 md:grid-cols-2">
+          <Link
+            href="/docs"
+            className="group rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950"
+          >
+            <div className="flex items-center gap-3 text-zinc-500 dark:text-zinc-400">
+              <BookOpen className="h-5 w-5" aria-hidden="true" />
+              <span className="text-sm font-medium uppercase tracking-wider">
+                PixStock
+              </span>
+            </div>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+              Asset infrastructure docs
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
+              Explore the original PixStock documentation site for APIs,
+              templates, and delivery workflows.
+            </p>
+          </Link>
+
+          <Link
+            href="/mechanic-setu"
+            className="group rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950"
+          >
+            <div className="flex items-center gap-3 text-zinc-500 dark:text-zinc-400">
+              <Wrench className="h-5 w-5" aria-hidden="true" />
+              <span className="text-sm font-medium uppercase tracking-wider">
+                Mechanic Setu
+              </span>
+            </div>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-zinc-950 dark:text-white">
+              Backend module docs
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
+              Open the new Mechanic Setu module built on the same docs system,
+              with authentication and profile API documentation.
+            </p>
+          </Link>
+        </div>
+
         <div className="border-t border-zinc-200 pt-16 dark:border-zinc-800">
           <div className="max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">

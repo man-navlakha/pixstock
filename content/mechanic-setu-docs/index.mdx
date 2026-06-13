@@ -1,0 +1,50 @@
+---
+title: Mechanic Setu Backend
+description: Express, PostgreSQL, JWT authentication, RBAC, and profile APIs for Mechanic Setu.
+---
+
+![Mechanic Setu logo](/mechanic%20setu%20doc/logo.png)
+
+Mechanic Setu is a backend platform for customers, mechanics, and
+administrators. The current documented modules cover password-based
+authentication, refresh-token rotation, role-based authorization, and
+authenticated user profile management.
+
+## Modules
+
+<Cards>
+  <Card
+    title="Authentication"
+    href="/mechanic-setu/docs/auth"
+    description="Register, login, refresh tokens, logout, current-user loading, JWT strategy, and RBAC."
+  />
+  <Card
+    title="User Profile"
+    href="/mechanic-setu/docs/user-profile"
+    description="Read and update the authenticated user's name, email, and profile image."
+  />
+  <Card
+    title="API Reference"
+    href="/mechanic-setu/docs/api"
+    description="See the documented route groups, authentication requirements, and response shape."
+  />
+</Cards>
+
+## Backend Shape
+
+The backend uses a feature-folder Express architecture:
+
+- Routes define paths and middleware.
+- Controllers translate HTTP input and output.
+- Services enforce business rules.
+- Repositories own SQL.
+- DTOs shape public responses and prevent sensitive data leaks.
+
+## Main Capabilities
+
+- Password-based registration and login for `CUSTOMER` and `MECHANIC` users.
+- JWT access tokens and rotating JWT refresh tokens.
+- Refresh-token reuse detection with token-family revocation.
+- Role-based authorization with `CUSTOMER`, `MECHANIC`, and `ADMIN` roles.
+- Authenticated user profile read and update APIs.
+- PostgreSQL migrations for auth tables and profile columns.

@@ -1,0 +1,59 @@
+---
+title: API Reference
+description: Review Mechanic Setu route groups, auth requirements, and response conventions.
+---
+
+The documented Mechanic Setu APIs are mounted under versioned route groups.
+Authentication APIs expose public credential endpoints plus protected current
+user loading. User profile APIs require a valid Bearer access token.
+
+## Base Route Groups
+
+| Module | Base URL | Auth Required |
+| --- | --- | --- |
+| Authentication | `/api/v1/auth` | Mixed |
+| User Profile | `/api/v1/users` | Yes |
+
+## Authentication Endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/api/v1/auth/register` | Register a customer or mechanic. |
+| `POST` | `/api/v1/auth/login` | Authenticate with phone number and password. |
+| `POST` | `/api/v1/auth/refresh-token` | Rotate a refresh token and issue a new token pair. |
+| `POST` | `/api/v1/auth/logout` | Revoke the current refresh token. |
+| `GET` | `/api/v1/auth/me` | Load the current user from a Bearer access token. |
+
+## User Profile Endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/api/v1/users/me` | Return the authenticated user's profile. |
+| `PATCH` | `/api/v1/users/me` | Update the authenticated user's own profile. |
+
+## Response Conventions
+
+Successful responses use a consistent envelope:
+
+```json
+{
+  "success": true,
+  "message": "Operation completed.",
+  "data": {}
+}
+```
+
+Profile responses return the public profile directly under `data`.
+Authentication responses return either `data.user`, `data.tokens`, or both.
+
+## Authorization Header
+
+Protected endpoints require:
+
+```http
+Authorization: Bearer <accessToken>
+```
+
+The access token is verified, then the user is reloaded from PostgreSQL before
+the request proceeds. This ensures deleted, disabled, locked, or inactive users
+cannot continue using old access tokens.
